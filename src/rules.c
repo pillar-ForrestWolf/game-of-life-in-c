@@ -2,5 +2,5 @@
 
 bool cell_alive(bool alive_now, int neighbors)
 {
-    return true;
+    return neighbors > 1;
 }
