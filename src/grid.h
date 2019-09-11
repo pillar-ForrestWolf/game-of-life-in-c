@@ -3,6 +3,6 @@
 
 #include <stdbool.h>
 
-int count_neighbors(int grid, int x, int y);
+int count_neighbors(bool grid[10][10], int x, int y);
 
 #endif
