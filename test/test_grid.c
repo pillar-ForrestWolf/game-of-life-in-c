@@ -67,7 +67,12 @@ TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_diagonal_neighbor)
     TEST_ASSERT_EQUAL_INT(1, count_neighbors(grid, 1, 1));
 }
 
-TEST(Grid, update_grid_leaves_an_empty_grid_empty)
+bool fake_is_alive_returning_false(bool current, int neighbors)
+{
+    return false;
+}
+
+TEST(Grid, v)
 {
     bool expected[10][10];
     bool actual[10][10];
@@ -75,7 +80,7 @@ TEST(Grid, update_grid_leaves_an_empty_grid_empty)
     fill_with_false(expected);
     fill_with_false(actual);
 
-    update_grid(actual);
+    update_grid(actual, fake_is_alive_returning_false);
 
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, actual, 10);
 }
@@ -88,5 +93,5 @@ TEST_GROUP_RUNNER(Grid)
     RUN_TEST_CASE(Grid, count_neighbors_returns_2_if_the_cell_has_neighbors_to_the_left_and_right);
     RUN_TEST_CASE(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_above);
     RUN_TEST_CASE(Grid, count_neighbors_returns_1_if_the_cell_has_a_diagonal_neighbor);
-    RUN_TEST_CASE(Grid, update_grid_leaves_an_empty_grid_empty);
+    RUN_TEST_CASE(Grid, update_grid_leaves_an_empty_grid_empty_when_passed_a_function_that_always_returns_false);
 }

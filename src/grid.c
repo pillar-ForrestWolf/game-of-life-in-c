@@ -21,7 +21,7 @@ int count_neighbors(bool grid[10][10], int x, int y)
     return neighbors;
 };
 
-void update_grid(bool grid[10][10])
+void update_grid(bool grid[10][10], bool(*f)(bool, int))
 {
 }
 
