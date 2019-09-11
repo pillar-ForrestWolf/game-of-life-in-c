@@ -20,3 +20,18 @@ int count_neighbors(bool grid[10][10], int x, int y)
 
     return neighbors;
 };
+
+void update_grid(bool grid[10][10])
+{
+}
+
+void fill_with_false(bool grid[10][10])
+{
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            grid[i][j] = false;
+        }
+    }
+}

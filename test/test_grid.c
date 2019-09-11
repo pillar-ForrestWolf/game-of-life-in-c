@@ -11,13 +11,7 @@ TEST_TEAR_DOWN(Grid) {}
 TEST(Grid, count_neighbors_returns_0_on_empty_grid)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     TEST_ASSERT_EQUAL_INT(0, count_neighbors(grid, 1, 1));
 }
@@ -25,13 +19,7 @@ TEST(Grid, count_neighbors_returns_0_on_empty_grid)
 TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_to_the_left)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     grid[0][0] = true;
 
@@ -41,13 +29,7 @@ TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_to_the_left)
 TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_to_the_right)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     grid[2][0] = true;
 
@@ -57,13 +39,7 @@ TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_to_the_right)
 TEST(Grid, count_neighbors_returns_2_if_the_cell_has_neighbors_to_the_left_and_right)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     grid[0][0] = true;
     grid[2][0] = true;
@@ -74,13 +50,7 @@ TEST(Grid, count_neighbors_returns_2_if_the_cell_has_neighbors_to_the_left_and_r
 TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_above)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     grid[0][0] = true;
 
@@ -90,19 +60,25 @@ TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_above)
 TEST(Grid, count_neighbors_returns_1_if_the_cell_has_a_diagonal_neighbor)
 {
     bool grid[10][10];
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            grid[i][j] = false;
-        }
-    }
+    fill_with_false(grid);
 
     grid[0][0] = true;
 
     TEST_ASSERT_EQUAL_INT(1, count_neighbors(grid, 1, 1));
 }
 
+TEST(Grid, update_grid_leaves_an_empty_grid_empty)
+{
+    bool expected[10][10];
+    bool actual[10][10];
+
+    fill_with_false(expected);
+    fill_with_false(actual);
+
+    update_grid(actual);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, actual, 10);
+}
 
 TEST_GROUP_RUNNER(Grid)
 {
@@ -112,4 +88,5 @@ TEST_GROUP_RUNNER(Grid)
     RUN_TEST_CASE(Grid, count_neighbors_returns_2_if_the_cell_has_neighbors_to_the_left_and_right);
     RUN_TEST_CASE(Grid, count_neighbors_returns_1_if_the_cell_has_a_neighbor_above);
     RUN_TEST_CASE(Grid, count_neighbors_returns_1_if_the_cell_has_a_diagonal_neighbor);
+    RUN_TEST_CASE(Grid, update_grid_leaves_an_empty_grid_empty);
 }
