@@ -21,17 +21,13 @@ int count_neighbors(bool grid[10][10], int x, int y)
     return neighbors;
 };
 
-void update_grid(bool grid[10][10], bool(*f)(bool, int))
+void update_grid(bool grid[10][10], bool (*rule)(bool, int))
 {
-}
-
-void fill_with_false(bool grid[10][10])
-{
-    for (int i = 0; i < 10; i++)
+    for (int x = 0; x < 10; x++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int y = 0; y < 10; y++)
         {
-            grid[i][j] = false;
+            grid[x][y] = rule(grid[x][y], count_neighbors(grid, x, y));
         }
     }
 }
