@@ -9,8 +9,9 @@ int count_neighbors(bool grid[10][10], int x, int y)
         for (int j = -1; j < 2; j++)
         {
             bool is_same_cell = (i == 0 && j == 0);
+            bool outside_array = (x + i < 0 || x + i >= 10 || y + j < 0 || y + j >= 10);
 
-            if (!is_same_cell && grid[x + i][y + j])
+            if (!is_same_cell && !outside_array && grid[x + i][y + j])
             {
                 neighbors++;
             }
