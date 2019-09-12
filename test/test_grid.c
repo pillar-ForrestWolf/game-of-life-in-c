@@ -159,6 +159,27 @@ TEST(Grid, update_grid_calls_passed_function_with_number_of_true_neighbors)
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, actual, 10);
 }
 
+bool fake_is_alive_returning_false_if_true_and_has_neighbor(bool current, int neighbors)
+{
+    return current && neighbors < 1;
+}
+
+TEST(Grid, update_grid_updates_cells_simultaneously)
+{
+    bool expected[10][10];
+    bool actual[10][10];
+
+    fill_with(false, expected);
+
+    fill_with(false, actual);
+    actual[2][2] = true;
+    actual[2][3] = true;
+
+    update_grid(actual, fake_is_alive_returning_false_if_true_and_has_neighbor);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, actual, 10);
+}
+
 TEST_GROUP_RUNNER(Grid)
 {
     RUN_TEST_CASE(Grid, count_neighbors_returns_0_on_empty_grid);
@@ -171,4 +192,5 @@ TEST_GROUP_RUNNER(Grid)
     RUN_TEST_CASE(Grid, update_grid_fills_an_empty_grid_with_true_when_passed_a_function_that_always_returns_true);
     RUN_TEST_CASE(Grid, update_grid_flips_values_when_passed_a_function_that_returns_the_opposite_of_its_input);
     RUN_TEST_CASE(Grid, update_grid_calls_passed_function_with_number_of_true_neighbors);
+    RUN_TEST_CASE(Grid, update_grid_updates_cells_simultaneously);
 }

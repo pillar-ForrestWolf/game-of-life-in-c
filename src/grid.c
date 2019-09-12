@@ -29,11 +29,21 @@ int count_neighbors(bool grid[10][10], int x, int y)
 
 void update_grid(bool grid[10][10], bool (*rule)(bool, int))
 {
+    bool next_grid[10][10];
+
     for (int x = 0; x < 10; x++)
     {
         for (int y = 0; y < 10; y++)
         {
-            grid[x][y] = rule(grid[x][y], count_neighbors(grid, x, y));
+            next_grid[x][y] = rule(grid[x][y], count_neighbors(grid, x, y));
+        }
+    }
+
+    for (int x = 0; x < 10; x++)
+    {
+        for (int y = 0; y < 10; y++)
+        {
+            grid[x][y] = next_grid[x][y];
         }
     }
 }
